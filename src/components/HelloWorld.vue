@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
     <el-menu
       :default-active="activeIndex2"
       class="el-menu-demo"
