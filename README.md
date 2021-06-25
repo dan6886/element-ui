@@ -25,6 +25,10 @@ npm run e2e
 
 # run all tests
 npm test
+
+# vscode 检查eslint格式化的配置问题(编译报错格式化问题)
+https://www.cnblogs.com/cuianbing/p/13751132.html
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
