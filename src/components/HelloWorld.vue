@@ -24,28 +24,19 @@
       </el-submenu>
       <el-menu-item index="3">消息中心</el-menu-item>
       <el-menu-item index="4"><a>订单管理</a></el-menu-item>
+      <el-submenu index="5" id="me">
+        <template slot="title">
+          <el-image
+            src="https://img2.baidu.com/it/u=2103035260,841148569&fm=26&fmt=auto&gp=0.jpg"
+            style="width: 50px; height: 50px"
+          ></el-image>
+          我
+        </template>
+        <el-menu-item index="5-1">选项1</el-menu-item>
+        <el-menu-item index="5-2">选项2</el-menu-item>
+        <el-menu-item index="5-3">选项3</el-menu-item>
+      </el-submenu>
     </el-menu>
-    <el-button type="primary">{{ value1 }}</el-button>
-    <div class="block">
-      <span class="demonstration">默认</span>
-      <el-slider v-model="value1"></el-slider>
-    </div>
-    <div class="block">
-      <span class="demonstration">自定义初始值</span>
-      <el-slider v-model="value2"></el-slider>
-    </div>
-    <div class="block">
-      <span class="demonstration">隐藏 Tooltip</span>
-      <el-slider v-model="value3" :show-tooltip="false"></el-slider>
-    </div>
-    <div class="block">
-      <span class="demonstration">格式化 Tooltip</span>
-      <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
-    </div>
-    <div class="block">
-      <span class="demonstration">禁用</span>
-      <el-slider v-model="value5" disabled></el-slider>
-    </div>
   </div>
 </template>
 
@@ -60,15 +51,15 @@ export default {
       value3: 36,
       value4: 48,
       value5: 42,
-      activeIndex2: '2'
+      activeIndex2: '1'
     }
   },
   methods: {
     formatTooltip (val) {
       return val / 100
     },
-    handleSelect () {
-      console.log('select')
+    handleSelect (val) {
+      console.log('select:' + val)
     }
   }
 }
@@ -90,5 +81,8 @@ li {
 }
 a {
   color: #42b983;
+}
+#me {
+  float: right;
 }
 </style>
