@@ -1,9 +1,41 @@
 <template>
   <el-row>
-    <el-col :span="18">
-      <Banner></Banner>
+    <el-col :span="16">
+      <el-carousel trigger="click">
+        <el-carousel-item
+          v-for="item in bigBanners"
+          :key="item"
+          style="height: 100%"
+        >
+          <div>
+            <el-image
+              :src="item.imagePath"
+              fit=" fill"
+              style="height: 340px; width: 580px"
+            >
+            </el-image>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </el-col>
-    <el-col :span="6"> </el-col>
+    <el-col :span="8">
+      <el-carousel direction="vertical">
+        <el-carousel-item
+          v-for="item in midBanners"
+          :key="item"
+          style="height: 100%"
+        >
+          <div>
+            <el-image
+              :src="item.imagePath"
+              fit=" fill"
+              style="height: 320px; width: 320px"
+            >
+            </el-image>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
+    </el-col>
   </el-row>
 </template>
 
@@ -40,11 +72,7 @@
 </style>
 
 <script>
-import Banner from '@/components/index/Banner'
 export default {
-  components: {
-    Banner
-  },
   data () {
     return {
       bigBanners: [{

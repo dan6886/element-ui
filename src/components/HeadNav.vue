@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">
+    <el-tab-pane label="用户管理" name="first" style="height: 100%">
       <IndexPage></IndexPage>
     </el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
