@@ -5,10 +5,17 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+Vue.prototype.$http = axios
+
+axios.defaults.withCredentials = false
+
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+// 配置请求头
+axios.defaults.baseURL = '/api'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
