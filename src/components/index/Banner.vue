@@ -3,8 +3,8 @@
     <el-col :span="16">
       <el-carousel trigger="click">
         <el-carousel-item
-          v-for="item in bigBanners"
-          :key="item"
+          v-for="(item, index) in bigBanners"
+          :key="index"
           style="height: 100%"
         >
           <div>
@@ -21,8 +21,8 @@
     <el-col :span="8">
       <el-carousel direction="vertical">
         <el-carousel-item
-          v-for="item in midBanners"
-          :key="item"
+          v-for="(item, index) in midBanners"
+          :key="index"
           style="height: 100%"
         >
           <div>
@@ -98,6 +98,7 @@ export default {
     getBannerData: function () {
       this.$http.get('/banner/json')
         .then((response) => {
+          console.log(this.$bus)
           this.bigBanners = []
           this.bigBanners.push(response.data.data[0])
           this.bigBanners.push(response.data.data[0])
@@ -105,7 +106,6 @@ export default {
           this.midBanners.push(response.data.data[1])
           this.midBanners.push(response.data.data[2])
         }).catch((response) => {
-          console.log(response)
         })
     }
   }

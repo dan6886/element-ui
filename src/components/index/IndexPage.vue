@@ -1,10 +1,58 @@
 <template>
-  <el-row>
-    <el-col :span="18">
-      <Banner></Banner>
-    </el-col>
-    <el-col :span="6"> </el-col>
-  </el-row>
+  <div>
+    <el-row>
+      <el-col :span="18">
+        <Banner></Banner>
+      </el-col>
+      <el-col :span="6"> </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="3">
+        <el-button plain style="font-size: 12px">站长在线招Android!</el-button>
+        <h3 style="text-align: left; height: 25px">推荐</h3>
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+        >
+          <el-menu-item index="1">
+            <span slot="title">热门博文</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <span slot="title">每日一问</span>
+          </el-menu-item>
+        </el-menu>
+        <el-divider></el-divider>
+        <h3 style="text-align: left; height: 25px">专题</h3>
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+        >
+          <el-menu-item index="1">
+            <span slot="title">面试相关</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <span slot="title">性能优化</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <span slot="title">framework</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <span slot="title">开源库源码</span>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <span slot="title">大厂分享</span>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+      <el-col :span="15">
+        <!-- <Banner></Banner> -->
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <style>
@@ -64,21 +112,10 @@ export default {
     }
   },
   created: function () {
-    this.getBannerData()
+    console.log(this.$bus)
   },
   methods: {
     getBannerData: function () {
-      this.$http.get('/banner/json')
-        .then((response) => {
-          this.bigBanners = []
-          this.bigBanners.push(response.data.data[0])
-          this.bigBanners.push(response.data.data[0])
-          this.midBanners = []
-          this.midBanners.push(response.data.data[1])
-          this.midBanners.push(response.data.data[2])
-        }).catch((response) => {
-          console.log(response)
-        })
     }
   }
 }
