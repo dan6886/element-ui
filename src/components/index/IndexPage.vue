@@ -13,8 +13,7 @@
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
+          @select="handleSelect"
         >
           <el-menu-item index="1">
             <span slot="title">热门博文</span>
@@ -26,10 +25,9 @@
         <el-divider></el-divider>
         <h3 style="text-align: left; height: 25px">专题</h3>
         <el-menu
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
+          @select="handleSelect"
         >
           <el-menu-item index="1">
             <span slot="title">面试相关</span>
@@ -115,7 +113,8 @@ export default {
     console.log(this.$bus)
   },
   methods: {
-    getBannerData: function () {
+    handleSelect (index, indexPath) {
+      console.log(index, indexPath)
     }
   }
 }
