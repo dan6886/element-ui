@@ -11,43 +11,36 @@
         <el-button plain style="font-size: 12px">站长在线招Android!</el-button>
         <h3 style="text-align: left; height: 25px">推荐</h3>
         <el-menu
-          default-active="2"
+          :default-active="RecommandSelect"
           class="el-menu-vertical-demo"
-          @select="handleSelect"
+          @select="handleRecommandSelect"
         >
-          <el-menu-item index="1">
-            <span slot="title">热门博文</span>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <span slot="title">每日一问</span>
+          <el-menu-item
+            v-for="(value, key) in chaptersOne"
+            :key="key"
+            :index="key"
+          >
+            <span slot="title">{{ value }}</span>
           </el-menu-item>
         </el-menu>
         <el-divider></el-divider>
         <h3 style="text-align: left; height: 25px">专题</h3>
         <el-menu
-          default-active="1"
+          :default-active="subjectSelect"
           class="el-menu-vertical-demo"
-          @select="handleSelect"
+          @select="handlesubjectSelect"
         >
-          <el-menu-item index="1">
-            <span slot="title">面试相关</span>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <span slot="title">性能优化</span>
-          </el-menu-item>
-          <el-menu-item index="3">
-            <span slot="title">framework</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <span slot="title">开源库源码</span>
-          </el-menu-item>
-          <el-menu-item index="5">
-            <span slot="title">大厂分享</span>
+          <el-menu-item
+            v-for="(value, key) in chaptersTwo"
+            :key="key"
+            :index="key"
+          >
+            <span slot="title">{{ value }}</span>
           </el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="15">
-        <!-- <Banner></Banner> -->
+        <!-- 文章列表-->
       </el-col>
     </el-row>
   </div>
@@ -106,15 +99,32 @@ export default {
         id: 0,
         title: '',
         url: ''
-      }]
+      }],
+      RecommandSelect: '2',
+      subjectSelect: '2',
+      chaptersOne: {
+        hotBlog: '热门博文',
+        question: '每日一问'
+      },
+      chaptersTwo: {
+        audition: '面试相关',
+        fixup: '性能优化',
+        framework: 'framework',
+        openSource: '开源库源码',
+        share: '大厂分享'
+      }
     }
   },
   created: function () {
     console.log(this.$bus)
   },
   methods: {
-    handleSelect (index, indexPath) {
-      console.log(index, indexPath)
+    handleRecommandSelect (index, indexPath) {
+      var key = index
+      console.log(key, this.chaptersOne[key])
+    },
+    handlesubjectSelect (index, indexPath) {
+      console.log(index, indexPath, this.RecommandSelect)
     }
   }
 }
