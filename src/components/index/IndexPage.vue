@@ -104,7 +104,7 @@ export default {
       }],
       RecommandSelect: '',
       subjectSelect: 'framework',
-      currentCid: '',
+      currentCid: '0',
       chaptersOne: {
         hotBlog: ['热门博文', 0],
         question: ['每日一问', 440]

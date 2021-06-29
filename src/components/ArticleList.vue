@@ -14,22 +14,26 @@
               width: 100%;
               height: 50px;
               font-size: 20px;
+              text-overflow: ellipsis;
+              max-width: 100%;
+              overflow: hidden;
+              white-space: nowrap;
             "
           >
             {{ item.title }}
           </a>
 
-          <span
+          <span class="subTitle"
             >作者：
             <a class="info">{{ item.shareUser }} </a>
           </span>
-          <span style="margin-left: 15px"
+          <span class="subTitle" style="margin-left: 15px"
             >分类：
-            <a>{{ item.chapterName }}</a>
+            <a class="info">{{ item.chapterName }}</a>
           </span>
-          <span style="margin-left: 15px"
+          <span class="subTitle" style="margin-left: 15px"
             >时间：
-            <a>{{ item.niceDate }}</a>
+            <a class="info">{{ item.niceDate }}</a>
           </span>
           <div class="clearfix"></div>
         </div>
@@ -56,7 +60,7 @@ i {
 .box {
   height: 100px;
 }
-span {
+.subTitle {
   color: #999;
   font-size: 15px;
   margin-right: 6px;
@@ -75,30 +79,62 @@ export default {
   props: { cid: '' },
   data () {
     return {
-      dataList: []
+      dataList: [],
+      pages: 0,
+      loading: false
     }
   },
   mounted: function () {
-    this.refreshList()
+    console.log('mount')
+    // this.refreshList(0)
+    this.listenerFunction()
+  },
+  beforeDestroy: function () {
+    document.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     handleClick (val) {
       console.log(val)
     },
     refreshList: function (cid) {
-      this.$http.get('/article/list/0/json?cid=' + cid)
+      this.$http.get(`/article/list/${this.pages}/json?cid=${cid}`)
         .then((response) => {
           console.log(response)
-          this.dataList = response.data.data.datas
+          // 拼接两个数组
+          this.dataList = this.dataList.concat(response.data.data.datas)
+          this.loading = false
         }).catch((response) => {
+          this.loading = false
         })
+    },
+    load: function () {
+    },
+    listenerFunction (e) {
+      document.addEventListener('scroll', this.handleScroll, true)
+    },
+    handleScroll () {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      var windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+      var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+
+      if (scrollTop + windowHeight === scrollHeight && !this.loading) {
+        // 写后台加载数据的函数
+        console.log('加载更多', this.cid)
+        this.pages++
+        this.loading = true
+        this.refreshList(this.cid)
+      }
     }
+
   },
   watch: {
     cid: function (newVal, oldVal) {
       console.log('请求网络', newVal)
+      this.dataList = []
+      this.pages = 0
       this.refreshList(newVal)
     }
   }
 }
+
 </script>
