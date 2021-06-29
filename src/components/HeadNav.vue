@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first" style="height: 100%">
+    <el-tab-pane label="用户管理" name="first">
       <IndexPage></IndexPage>
     </el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
@@ -19,6 +19,10 @@
 .el-aside {
   color: #333;
 }
+.el-tab-pane {
+  background-color: rgb(244, 244, 244);
+  padding: 10px;
+}
 </style>
 
 <script>
@@ -28,13 +32,7 @@ export default {
     IndexPage
   },
   data () {
-    const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
     return {
-      tableData: Array(20).fill(item),
       activeName: 'first'
     }
   },

@@ -16,6 +16,7 @@ axios.defaults.withCredentials = false
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 // 配置请求头
 axios.defaults.baseURL = '/api'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

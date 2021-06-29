@@ -20,7 +20,7 @@
             :key="key"
             :index="key"
           >
-            <span slot="title">{{ value }}</span>
+            <span slot="title">{{ value[0] }}</span>
           </el-menu-item>
         </el-menu>
         <el-divider></el-divider>
@@ -35,12 +35,13 @@
             :key="key"
             :index="key"
           >
-            <span slot="title">{{ value }}</span>
+            <span slot="title">{{ value[0] }}</span>
           </el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="15">
         <!-- 文章列表-->
+        <ArticleList :cid="currentCid"></ArticleList>
       </el-col>
     </el-row>
   </div>
@@ -80,9 +81,10 @@
 
 <script>
 import Banner from '@/components/index/Banner'
+import ArticleList from '@/components/ArticleList'
 export default {
   components: {
-    Banner
+    Banner, ArticleList
   },
   data () {
     return {
@@ -100,18 +102,19 @@ export default {
         title: '',
         url: ''
       }],
-      RecommandSelect: '2',
-      subjectSelect: '2',
+      RecommandSelect: '',
+      subjectSelect: 'framework',
+      currentCid: '',
       chaptersOne: {
-        hotBlog: '热门博文',
-        question: '每日一问'
+        hotBlog: ['热门博文', 0],
+        question: ['每日一问', 440]
       },
       chaptersTwo: {
-        audition: '面试相关',
-        fixup: '性能优化',
-        framework: 'framework',
-        openSource: '开源库源码',
-        share: '大厂分享'
+        audition: ['面试相关', 73],
+        fixup: ['性能优化', 78],
+        framework: ['framework', 152],
+        openSource: ['开源库源码', 460],
+        share: ['大厂分享', 510]
       }
     }
   },
@@ -121,11 +124,16 @@ export default {
   methods: {
     handleRecommandSelect (index, indexPath) {
       var key = index
-      console.log(key, this.chaptersOne[key])
+      this.currentCid = this.chaptersOne[key][1]
+      // console.log(key, this.chaptersOne[key], this.currentCid)
+      console.log('点击推荐', this.currentCid)
     },
     handlesubjectSelect (index, indexPath) {
-      console.log(index, indexPath, this.RecommandSelect)
-    }
+      var key = index
+      this.currentCid = this.chaptersTwo[key][1]
+      console.log('点击专题', this.currentCid)
+    },
+    load () { }
   }
 }
 </script>
