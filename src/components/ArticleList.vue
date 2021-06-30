@@ -19,6 +19,10 @@
               overflow: hidden;
               white-space: nowrap;
             "
+            :href="item.mouseOn"
+            target="_blank"
+            @mouseenter="mouseEnter(item.link, $event)"
+            @mouseout="mouseOut($event)"
           >
             {{ item.title }}
           </a>
@@ -86,7 +90,6 @@ export default {
   },
   mounted: function () {
     console.log('mount')
-    // this.refreshList(0)
     this.listenerFunction()
   },
   beforeDestroy: function () {
@@ -124,6 +127,16 @@ export default {
         this.loading = true
         this.refreshList(this.cid)
       }
+    },
+    mouseEnter: function (link, event) {
+      // 增加属性
+      let t = event.currentTarget
+      t.setAttribute('href', link)
+    },
+    mouseOut: function (event) {
+      // 删除属性
+      let t = event.currentTarget
+      t.removeAttribute('href')
     }
 
   },
