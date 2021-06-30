@@ -1,10 +1,25 @@
 <template>
   <div>
-    <el-row>
+    <el-row :gutter="20">
       <el-col :span="18">
         <Banner></Banner>
       </el-col>
-      <el-col :span="6"> </el-col>
+      <el-col :span="6">
+        <el-row>
+          <el-col :span="16" :offset="0"
+            ><el-input id="input" @focus="focus" @blur="blur"
+          /></el-col>
+          <el-col :span="6" style="text-align: left"
+            ><el-button type="danger" style="">搜索</el-button>
+            <div class="clearfix"></div>
+          </el-col>
+        </el-row>
+        <el-row style="text-align: left">
+          <el-button type="danger" v-for="i in sites1" :key="i">{{
+            i
+          }}</el-button>
+        </el-row>
+      </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col :span="3">
@@ -77,6 +92,8 @@
 .el-carousel__container {
   height: 350px;
 }
+#input {
+}
 </style>
 
 <script>
@@ -115,7 +132,8 @@ export default {
         framework: ['framework', 152],
         openSource: ['开源库源码', 460],
         share: ['大厂分享', 510]
-      }
+      },
+      sites1: ['本站开发API', '待办清单', '分享文章', '分享项目', '本站APP下载', '问答整机']
     }
   },
   created: function () {
